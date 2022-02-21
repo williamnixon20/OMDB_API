@@ -1,0 +1,45 @@
+## To use this script, download REST Client extension. 
+## I used this script to test my program.
+
+
+### Without token, /movies will be unaccesible.
+GET http://localhost:3000/movies
+
+### Request Token by authenticating yourself.
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+    "name": "Montana",
+    "password": "2345"
+}
+
+### Put received token in header, see if it's valid.
+GET http://localhost:3000/auth/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiTW9udGFuYSIsInBhc3N3b3JkIjoiJDJiJDEwJGZBY2Z4T3QyTjVYdURubEtobXVSdHUyeWgwazRWRjBsOU5rMzdEM2tKZXhGM0hsR3NKTVBXIiwidXNlcl9pZCI6Ijk5NWM0OGRhLWQ5MjMtNDVhZS1hOWU1LTcxZjNlODc2MjA3YyIsImlhdCI6MTY0NTQxMzc0MH0.A1XaNsBXgZH6w7OTTN7ScXePRDaUae-SHGzCQGQVRi4
+
+### Use the received token to access endpoints that would otherwise be blocked! (Note, /movies is forbidden by default)
+GET http://localhost:3000/movies
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiTW9udGFuYSIsInBhc3N3b3JkIjoiJDJiJDEwJGZBY2Z4T3QyTjVYdURubEtobXVSdHUyeWgwazRWRjBsOU5rMzdEM2tKZXhGM0hsR3NKTVBXIiwidXNlcl9pZCI6Ijk5NWM0OGRhLWQ5MjMtNDVhZS1hOWU1LTcxZjNlODc2MjA3YyIsImlhdCI6MTY0NTQxMzc0MH0.A1XaNsBXgZH6w7OTTN7ScXePRDaUae-SHGzCQGQVRi4
+
+### Add an extra parameter (/movies/{movie title}) for direct access to desired movie URL.
+GET http://localhost:3000/movies/pocoyo
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiTW9udGFuYSIsInBhc3N3b3JkIjoiJDJiJDEwJGZBY2Z4T3QyTjVYdURubEtobXVSdHUyeWgwazRWRjBsOU5rMzdEM2tKZXhGM0hsR3NKTVBXIiwidXNlcl9pZCI6Ijk5NWM0OGRhLWQ5MjMtNDVhZS1hOWU1LTcxZjNlODc2MjA3YyIsImlhdCI6MTY0NTQxMzc0MH0.A1XaNsBXgZH6w7OTTN7ScXePRDaUae-SHGzCQGQVRi4
+
+
+### Add the parameter {/movies/favorite} to gain URLS of the user's favorite movies.
+GET http://localhost:3000/movies/favorite
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiTW9udGFuYSIsInBhc3N3b3JkIjoiJDJiJDEwJGZBY2Z4T3QyTjVYdURubEtobXVSdHUyeWgwazRWRjBsOU5rMzdEM2tKZXhGM0hsR3NKTVBXIiwidXNlcl9pZCI6Ijk5NWM0OGRhLWQ5MjMtNDVhZS1hOWU1LTcxZjNlODc2MjA3YyIsImlhdCI6MTY0NTQxMzc0MH0.A1XaNsBXgZH6w7OTTN7ScXePRDaUae-SHGzCQGQVRi4
+
+### Send a POST request to {/movies/favorite} to add a movie to the user's favorite list!
+POST http://localhost:3000/movies/favorite
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiTW9udGFuYSIsInBhc3N3b3JkIjoiJDJiJDEwJGZBY2Z4T3QyTjVYdURubEtobXVSdHUyeWgwazRWRjBsOU5rMzdEM2tKZXhGM0hsR3NKTVBXIiwidXNlcl9pZCI6Ijk5NWM0OGRhLWQ5MjMtNDVhZS1hOWU1LTcxZjNlODc2MjA3YyIsImlhdCI6MTY0NTQxMzc0MH0.A1XaNsBXgZH6w7OTTN7ScXePRDaUae-SHGzCQGQVRi4
+Content-Type: application/json
+
+{
+    "title" : "Captain America"
+}
+
+### See if previous insertion was a success (user should now have 4 urls)
+GET http://localhost:3000/movies/favorite
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiTW9udGFuYSIsInBhc3N3b3JkIjoiJDJiJDEwJGZBY2Z4T3QyTjVYdURubEtobXVSdHUyeWgwazRWRjBsOU5rMzdEM2tKZXhGM0hsR3NKTVBXIiwidXNlcl9pZCI6Ijk5NWM0OGRhLWQ5MjMtNDVhZS1hOWU1LTcxZjNlODc2MjA3YyIsImlhdCI6MTY0NTQxMzc0MH0.A1XaNsBXgZH6w7OTTN7ScXePRDaUae-SHGzCQGQVRi4
