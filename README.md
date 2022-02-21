@@ -35,4 +35,4 @@ This is a mock private API that will return URLs of desired movie posters. It us
 6. Run the server.
 **npm run dev**
 
-7. Everything should be good to go! I used a request.rest file to send requests to test the app.:)
+7. Everything should be good to go! I used a request.rest file to send requests to test the app. :)
